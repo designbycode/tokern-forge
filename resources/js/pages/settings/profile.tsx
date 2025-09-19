@@ -39,14 +39,13 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
                     <Form
                         {...ProfileController.update.form()}
-                        options={{
-                            preserveScroll: true,
-                            onSuccess: () => {
-                                toast.success('Profile updated', {
-                                    description: 'Your profile has been updated successfully.',
-                                });
-                            },
+                        onSuccess={() => {
+                            toast.success('Profile updated', {
+                                description: 'Your profile has been updated successfully.',
+                            });
+
                         }}
+                        preserveScroll
                         className="space-y-6"
                     >
                         {({ processing, errors }) => (

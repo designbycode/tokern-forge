@@ -34,14 +34,13 @@ export default function Password() {
 
                     <Form
                         {...PasswordController.update.form()}
-                        options={{
-                            preserveScroll: true,
-                            onSuccess: () => {
-                                toast.success('Password updated', {
-                                    description: 'Your password has been updated successfully.',
-                                });
-                            },
+                        onSuccess={() => {
+                            toast.success('Password updated', {
+                                description: 'Your password has been updated successfully.',
+                            });
+
                         }}
+                        preserveScroll
                         resetOnError={['password', 'password_confirmation', 'current_password']}
                         resetOnSuccess
                         onError={(errors) => {
