@@ -1,6 +1,7 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-
+import { useInitials } from '@/hooks/use-initials';
 import { useForm } from '@inertiajs/react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
@@ -8,7 +9,7 @@ import { ImageCrop, ImageCropApply, ImageCropContent } from '../../../components
 
 interface AvatarUploadProps {
     user: {
-        avatar?: string | null | undefined;
+        avatar: string;
         name: string;
     };
 }
@@ -30,12 +31,15 @@ export function AvatarUpload({ user }: AvatarUploadProps) {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [open, setOpen] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const getInitials = useInitials();
     const {
         setData,
         post,
         processing,
         delete: destroy,
-    } = useForm<{
+    }
+
+    = useForm<{
         avatar: File | null;
     }>({
         avatar: null,
@@ -76,7 +80,10 @@ export function AvatarUpload({ user }: AvatarUploadProps) {
 
     return (
         <div className="flex items-center gap-4">
-            <img src={user.avatar || ''} alt={user.name} className="h-16 w-16 rounded-full object-cover" />
+            <Avatar className="h-16 w-16">
+                <AvatarImage src={user.avatar} />
+                <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+            </Avatar>
             <div className="grid gap-2">
                 <div className="flex gap-2">
                     <Dialog open={open} onOpenChange={setOpen}>
