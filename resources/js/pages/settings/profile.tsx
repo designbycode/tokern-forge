@@ -3,6 +3,7 @@ import { send } from '@/routes/verification';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Transition } from '@headlessui/react';
 import { Form, Head, Link, usePage } from '@inertiajs/react';
+import { toast } from 'sonner';
 
 import { AvatarUpload } from '@/components/avatar-upload';
 import DeleteUser from '@/components/delete-user';
@@ -39,9 +40,12 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
 
                     <Form
                         {...ProfileController.update.form()}
-                        options={{
-                            preserveScroll: true,
+                        onSuccess={() => {
+                            toast.success('Profile updated', {
+                                description: 'Your profile has been updated successfully.',
+                            });
                         }}
+                        preserveScroll
                         className="space-y-6"
                     >
                         {({ processing, recentlySuccessful, errors }) => (

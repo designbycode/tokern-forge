@@ -6,6 +6,7 @@ import { type BreadcrumbItem } from '@/types';
 import { Transition } from '@headlessui/react';
 import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
+import { toast } from 'sonner';
 
 import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';
@@ -34,9 +35,12 @@ export default function Password() {
 
                     <Form
                         {...PasswordController.update.form()}
-                        options={{
-                            preserveScroll: true,
+                        onSuccess={() => {
+                            toast.success('Password updated', {
+                                description: 'Your password has been updated successfully.',
+                            });
                         }}
+                        preserveScroll
                         resetOnError={['password', 'password_confirmation', 'current_password']}
                         resetOnSuccess
                         onError={(errors) => {
