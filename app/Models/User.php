@@ -37,7 +37,14 @@ class User extends Authenticatable implements HasMedia
         'remember_token',
     ];
 
-    public function avatar(): string
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['avatar'];
+
+    public function getAvatarAttribute(): string
     {
         if ($this->hasMedia('avatar')) {
             return $this->getFirstMediaUrl('avatar', '80x80');
