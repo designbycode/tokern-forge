@@ -3,7 +3,6 @@ import InputError from '@/components/input-error';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { type BreadcrumbItem } from '@/types';
-import { Transition } from '@headlessui/react';
 import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
 import { toast } from 'sonner';
@@ -39,6 +38,7 @@ export default function Password() {
                             toast.success('Password updated', {
                                 description: 'Your password has been updated successfully.',
                             });
+
                         }}
                         preserveScroll
                         resetOnError={['password', 'password_confirmation', 'current_password']}
@@ -54,7 +54,7 @@ export default function Password() {
                         }}
                         className="space-y-6"
                     >
-                        {({ errors, processing, recentlySuccessful }) => (
+                        {({ errors, processing }) => (
                             <>
                                 <div className="grid gap-2">
                                     <Label htmlFor="current_password">Current password</Label>
@@ -105,16 +105,6 @@ export default function Password() {
 
                                 <div className="flex items-center gap-4">
                                     <Button disabled={processing} data-test="update-password-button">Save password</Button>
-
-                                    <Transition
-                                        show={recentlySuccessful}
-                                        enter="transition ease-in-out"
-                                        enterFrom="opacity-0"
-                                        leave="transition ease-in-out"
-                                        leaveTo="opacity-0"
-                                    >
-                                        <p className="text-sm text-neutral-600">Saved</p>
-                                    </Transition>
                                 </div>
                             </>
                         )}

@@ -37,7 +37,9 @@ export function AvatarUpload({ user }: AvatarUploadProps) {
         post,
         processing,
         delete: destroy,
-    } = useForm<{
+    }
+
+    = useForm<{
         avatar: File | null;
     }>({
         avatar: null,
